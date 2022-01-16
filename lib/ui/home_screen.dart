@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:git_social_app/data/repositories/api_service.dart';
-import 'package:git_social_app/ui/search.dart';
+import 'package:git_social_app/ui/search_screen.dart';
 import 'package:git_social_app/data/model/top_repos_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           const Icon(
                                             Icons.collections_bookmark,
-                                            color: Color(0xFF111111),
+                                            color: Color(0xFF4B39EF),
                                             size: 18,
                                           ),
                                           const SizedBox(
@@ -76,12 +77,12 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 12,
                                         ),
                                       ),
-                                      const SizedBox(height: 20),
+                                      const SizedBox(height: 15),
                                       Row(
                                         children: [
                                           const Icon(
                                             Icons.star,
-                                            color: Color(0xFF111111),
+                                            color: Color(0xFF4B39EF),
                                             size: 15,
                                           ),
                                           Text(
@@ -94,9 +95,10 @@ class _HomePageState extends State<HomePage> {
                                           const SizedBox(
                                             width: 15,
                                           ),
-                                          const Icon(
-                                            Icons.device_hub,
-                                            color: Color(0xFF111111),
+                                          FaIcon(
+                                            FontAwesomeIcons
+                                                .codeBranch,
+                                            color: Color(0xFF4B39EF),
                                             size: 15,
                                           ),
                                           Text(
@@ -114,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                               if(data?[index].language != null)...[
                                                 const Icon(
                                                   Icons.language,
-                                                  color: Color(0xFF111111),
+                                                  color: Color(0xFF4B39EF),
                                                   size: 15,
                                                 ),
                                                 Text(

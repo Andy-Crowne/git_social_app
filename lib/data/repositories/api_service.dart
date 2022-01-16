@@ -3,6 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:git_social_app/data/model/user_model.dart';
 import 'package:git_social_app/data/model/top_repos_model.dart';
+import 'package:git_social_app/data/model/repository_model.dart';
 
 class FetchUserList {
   Future<List<Items>> getUserList({String? query}) async {
@@ -75,6 +76,43 @@ class FetchTopRepositoriesList {
               forksCount: u['forks_count']
           );
           results.add(item);
+        }
+      } else {
+        print("fetch error");
+      }
+    } catch (e) {
+      print(e);
+    }
+    return results;
+  }
+}
+
+class FetchAllUserRepositoriesList {
+  Future<List<Repo>> getUserRepositoriesList({String? query}) async {
+    List<Repo> results = [];
+    var url = Uri.parse(
+        'https://api.github.com/users/$query/repos');
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var jsonResponse =
+        convert.jsonDecode(response.body) as List<dynamic>;
+        for (var u in jsonResponse) {
+          DateTime stringToDate = DateTime.parse(u['updated_at']);
+          Repo repo = Repo(
+              id : u['id'],
+              name : u['name'],
+              fullName : u['full_name'],
+              htmlUrl : u['html_url'],
+              description : u['description'],
+              url : u['url'],
+              updatedAt : stringToDate,
+              stargazersCount : u['stargazers_count'],
+              language : u['language'],
+              forksCount : u['forks_count'],
+              defaultBranch : u['default_branch'],
+          );
+          results.add(repo);
         }
       } else {
         print("fetch error");
